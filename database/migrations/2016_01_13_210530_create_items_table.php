@@ -18,7 +18,8 @@ class CreateItemsTable extends Migration
             $table->foreign('resource_id')->references('id')->on('resources')
                   ->onDelete('cascade');
             $table->string('key');
-            $table->string('value_enc');
+            //$table->string('value_enc');
+            $table->string('value');
             $table->timestamps();
         });
     }

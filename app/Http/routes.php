@@ -35,9 +35,9 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
     Route::resource('resource', 'ResourceController');
-    Route::resource('attribute', 'AttributeController');
+    //Route::resource('attribute', 'AttributeController');
+    Route::resource('item', 'ItemController');
 });
 
-//Route::resource('item', 'ItemController');
 Route::resource('test', 'TestController');
-Route::resource('{model}', 'TestController');
+//Route::resource('{model}', 'TestController');

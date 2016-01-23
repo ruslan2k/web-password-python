@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Item;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -32,7 +33,7 @@ class ItemController extends Controller
     }
 
 
-    public function store (Request $request)
+    public function store_RedBean (Request $request)
     {
         $item = R::dispense('item');
         $item->name = $request->input('name');
@@ -40,6 +41,17 @@ class ItemController extends Controller
         return redirect()->route('item.show', ['id' => $id]);
     }
 
+    public function store (Request $request)
+    {
+        $item = new Item;
+        $item->key = $request->key;
+        $item->value = $request->value;
+        $item->resource_id = $request->resource_id; 
+        //dump($attribute); 
+        $item->save(); 
+        return redirect()->route('resource.show',
+            ['id' => $request->resource_id]);
+    }
 
     /**
      * Update the specified item.

@@ -5,10 +5,10 @@
 <h2>
   {{ $resource->name }}
 </h2>
-  {{ dump($resource->attributes_123) }}
+  {{ dump($resource->items) }}
   <li>
   </li>
-{!! Form::open(['method' => 'post', 'url' => 'attribute']) !!}
+{!! Form::open(['method' => 'post', 'url' => 'item']) !!}
 {!! Form::label('key', 'Key') !!}
 {!! Form::text('key') !!}
 {!! Form::label('value', 'Value') !!}
