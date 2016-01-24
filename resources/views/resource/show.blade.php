@@ -1,13 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<p>Resource Show</p>
 <h2>
   {{ $resource->name }}
 </h2>
-  {{ dump($resource->items) }}
+<ul>
+@forelse ($resource->items as $item)
   <li>
+    {{ $item->key }}: <input class="secret" value="{{ $item->value }}"/>
   </li>
+@empty
+@endforelse
+</ul>
+{{--
+  dump($resource->items)
+--}}
+
 {!! Form::open(['method' => 'post', 'url' => 'item']) !!}
 {!! Form::label('key', 'Key') !!}
 {!! Form::text('key') !!}
