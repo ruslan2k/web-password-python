@@ -5,11 +5,18 @@
 <ul>
 @forelse ($resources as $resource)
   <li>
+    {{--
     <a href="/resource/{{ $resource->id }}">
       {{ $resource->name }}
     </a>
+    --}}
       {{-- dump($resource) --}}
     <form action="/resource/{{ $resource->id }}" method="post">
+      <span>
+        <a href="/resource/{{ $resource->id }}">
+          {{ $resource->name }}
+        </a>
+      </span>
       {{ csrf_field() }}
       {{ method_field('DELETE') }}
       <button>x</button>
