@@ -34,11 +34,8 @@ class ResourceController extends Controller
 
     public function index (Request $request)
     {
-        //$resources = Resource::all();
-        $resources = Resource::where('user_id', $request->user()->id)->get();
-
         return view('resource.index', [
-            'resources' => $resources,
+            'resources' => $this->resources->forUser($request->user()),
         ]);
     }
 
@@ -47,12 +44,20 @@ class ResourceController extends Controller
         return view('resource.show', ['resource' => $resource]);
     }
 
+    /**
+     * Create a new resource
+     *
+     * @param Request $request
+     * @return Response
+     */
     public function store (Request $request)
     {
-        $resource = new Resource;
-        $resource->name = $request->name;
-        $resource->save();
-        //return redirect()->route('resource.index', ['id' => $id]);
+        //$this->validate();
+
+        $request->user()->resources()->create([
+            'name' => $request->name,
+        ]);
+
         return redirect()->route('resource.index');
     }
 

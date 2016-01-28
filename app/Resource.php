@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Resource extends Model
 {
-//    /**
-//     * The attributes that are mass assignable.
-//     *
-//     * @var array
-//     */
-//    protected $fillable = [
-//        'name', 'email', 'password',
-//    ];
-//
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+    ];
+
 //    /**
 //     * The attributes excluded from the model's JSON form.
 //     *

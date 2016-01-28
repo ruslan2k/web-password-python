@@ -6,9 +6,9 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-//use App\library\CryptoLib as CryptoLib;
 use App\library\CryptoLib;
+
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -40,5 +40,13 @@ class User extends Authenticatable
         User::creating (function ($user) {
             $user->salt = CryptoLib::genSaltBase64();
         });
+    }
+
+    /**
+     * Get all of the resources for the user.
+     */
+    public function resources()
+    {
+        return $this->hasMany(Resource::class);
     }
 }
