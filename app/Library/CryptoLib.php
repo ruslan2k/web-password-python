@@ -4,7 +4,7 @@
  * https://laracasts.com/discuss/channels/general-discussion/l5-how-to-add-custom-php-classes-in-l5
  */
 
-namespace App\library;
+namespace App\Library;
 
 
 define("DEF_ITERATIONS", 1000);
@@ -12,7 +12,9 @@ define("DEF_ITERATIONS", 1000);
 class CryptoLib
 {
     /**
+     * Generate binary salt
      *
+     * @return bin
      */
     public static function genSaltBin ()
     {
@@ -20,7 +22,9 @@ class CryptoLib
     }
 
     /**
+     * Generate binary salt
      *
+     * @return string
      */
     public static function genSaltBase64 ()
     {

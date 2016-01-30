@@ -6,7 +6,7 @@
 
 namespace App;
 
-use App\library\CryptoLib;
+use App\Library\CryptoLib;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 

@@ -20,14 +20,11 @@
     "autoload": {
         "classmap": [
             "database",
-            "app/library"
+            "app/Library"
         ],
         "psr-4": {
             "App\\": "app/"
-        },
-        "bla_bla_files": [
-            "app/library/CryptoLib.php"
-        ]
+        }
     },
     "autoload-dev": {
         "classmap": [
