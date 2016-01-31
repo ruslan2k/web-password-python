@@ -34,7 +34,8 @@ class ResourceController extends Controller
 
     public function index (Request $request)
     {
-        return dump($request->user());
+        //return dump($request->user());
+        return dump($request->session());
         //return view('resource.index', [
         //    'resources' => $this->resources->forUser($request->user()),
         //]);

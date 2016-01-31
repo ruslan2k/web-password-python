@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Monolog\Logger;
 
 class AfterLoginMiddleware
 {
@@ -15,9 +16,11 @@ class AfterLoginMiddleware
      */
     public function handle($request, Closure $next)
     {
+        //$log = new Logger('test');
+        //$log->addError('test', [$request->password]);
         $response = $next($request);
 
-        $request->session->put('answer', '42');
+        $request->session()->put('answer', '42');
 
         return $response;
     }

@@ -30,12 +30,11 @@ Route::group(['middleware' => ['web']], function () {
     //
 });
 
-Route::group(['middleware' => 'web'], function () {
-    Route::auth();
+Route::group(['middleware' => ['web']], function () {
+    Route::auth(['middleware' => 'after_login']);
 
     Route::get('/home', 'HomeController@index');
     Route::resource('resource', 'ResourceController');
-    //Route::resource('attribute', 'AttributeController');
     Route::resource('item', 'ItemController');
 });
 
