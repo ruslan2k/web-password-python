@@ -34,9 +34,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::auth(['middleware' => 'after_login']);
 
     Route::get('/home', 'HomeController@index');
+    Route::get('/test', 'ResourceController@test');
     Route::resource('resource', 'ResourceController');
     Route::resource('item', 'ItemController');
 });
 
-Route::resource('test', 'TestController');
+//Route::resource('test', 'TestController');
 //Route::resource('{model}', 'TestController');

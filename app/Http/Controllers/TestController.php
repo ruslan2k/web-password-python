@@ -12,7 +12,8 @@ use RedBeanPHP\Facade as R;
 class TestController extends Controller
 {
 
-    public function index (Request $request, $model)
+    //public function index (Request $request, $model)
+    public function index (Request $request)
     {
         $beans = R::findAll($model);
         $records = R::exportAll($beans, true);

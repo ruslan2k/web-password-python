@@ -73,6 +73,7 @@
             </div>
             <div>
                 <a href="{{ url('/resource') }}">Resources</a>
+                <a href="{{ url('/test') }}">test</a>
             </div>
         </div>
     </nav>

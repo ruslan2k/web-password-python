@@ -68,4 +68,9 @@ class ResourceController extends Controller
         $resource->delete();
         return redirect('/resource');   
     }
+
+    public function test (Request $request)
+    {
+        dump($request->session()->get('sym_pass'));
+    }
 }
