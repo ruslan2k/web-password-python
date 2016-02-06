@@ -44,10 +44,10 @@ class ItemController extends Controller
     public function store (Request $request)
     {
         $item = new Item;
+        $item->setSymPass($request->session()->get('sym_pass'));
         $item->key = $request->key;
         $item->value = $request->value;
         $item->resource_id = $request->resource_id; 
-        //dump($attribute); 
         $item->save(); 
         return redirect()->route('resource.show',
             ['id' => $request->resource_id]);

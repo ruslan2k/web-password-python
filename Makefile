@@ -14,4 +14,4 @@ vendor/autoload.php:
 composer.json: vendor/autoload.php
 
 dump:
-	mysqldump -h${DB_HOST} -u${DB_USERNAME} -p${DB_PASSWORD} ${DB_DATABASE} | less
+	mysqldump -h${DB_HOST} -u${DB_USERNAME} -p${DB_PASSWORD} ${DB_DATABASE}  --extended-insert=FALSE   | less
