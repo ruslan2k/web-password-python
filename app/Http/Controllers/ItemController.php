@@ -46,7 +46,7 @@ class ItemController extends Controller
         $item = new Item;
         $item->setSymPass($request->session()->get('sym_pass'));
         $item->key = $request->key;
-        $item->value = $request->value;
+        $item->val = $request->val;
         $item->resource_id = $request->resource_id; 
         $item->save(); 
         return redirect()->route('resource.show',

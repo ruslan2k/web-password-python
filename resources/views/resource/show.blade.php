@@ -7,20 +7,17 @@
 <ul>
 @forelse ($resource->items as $item)
   <li>
-    {{ $item->key }}: <input class="secret" value="{{ $item->value }}"/>
+    {{ $item->key }}: <input class="secret" value="{{ $item->val }}"/>
   </li>
 @empty
 @endforelse
 </ul>
-{{--
-  dump($resource->items)
---}}
 
 {!! Form::open(['method' => 'post', 'url' => 'item']) !!}
 {!! Form::label('key', 'Key') !!}
 {!! Form::text('key') !!}
-{!! Form::label('value', 'Value') !!}
-{!! Form::text('value') !!}
+{!! Form::label('val', 'Value') !!}
+{!! Form::text('val') !!}
 {!! Form::hidden('resource_id', $resource->id) !!}
 {!! Form::submit('Add') !!}
 {!! Form::close() !!}

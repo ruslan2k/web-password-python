@@ -17,9 +17,9 @@ class CreateItemsTable extends Migration
             $table->integer('resource_id')->unsigned();
             $table->foreign('resource_id')->references('id')->on('resources')
                   ->onDelete('cascade');
+            $table->string('iv');
             $table->string('key');
-            //$table->string('value_enc');
-            $table->string('value');
+            $table->string('val');
             $table->timestamps();
         });
     }

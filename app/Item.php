@@ -28,9 +28,19 @@ class Item extends Model
                 return false;
             }
             $iv = random_bytes(16); 
-            $value = openssl_encrypt($item->value, 'AES-256-CBC', $item->sym_pass, 0, $iv);
-            $item->value = $value;
+            $val = openssl_encrypt($item->val, 'AES-256-CBC', $item->sym_pass, 0, $iv);
+            $item->val = $val;
+            $item->iv = base64_encode($iv);
         });
+    }
+
+    public function getDecryptedValue ()
+    {
+        if ( ! isset($this->sym_pass)) {
+            return false;
+        }
+        $iv = base64_decode($this->iv);
+        return 'FIXME';
     }
 
     /**

@@ -32,17 +32,29 @@ class ResourceController extends Controller
         $this->resources = $resources;
     }
 
+    /**
+     * Show a list of all user resources
+     *
+     * @param Request $request
+     * @return Response
+     */
     public function index (Request $request)
     {
-        //return dump($request->user());
-        //return dump($request->session());
         return view('resource.index', [
             'resources' => $this->resources->forUser($request->user()),
         ]);
     }
 
-    public function show (Resource $resource)
+    /**
+     *
+     *
+     */
+    public function show (Request $request, Resource $resource)
     {
+        foreach ($resource->items as $item) {
+            $item->setSymPass($request->session()->get('sym_pass'));
+            $item->val = $item->getDecryptedValue();
+        }
         return view('resource.show', ['resource' => $resource]);
     }
 
@@ -67,10 +79,5 @@ class ResourceController extends Controller
     {
         $resource->delete();
         return redirect('/resource');   
-    }
-
-    public function test (Request $request)
-    {
-        dump($request->session()->get('sym_pass'));
     }
 }
