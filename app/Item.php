@@ -5,6 +5,8 @@ namespace App;
 use App\Library\CryptoLib;
 use Illuminate\Database\Eloquent\Model;
 
+define('DEF_METHOD', 'AES-256-CBC');
+
 class Item extends Model
 {
     /**
@@ -27,10 +29,10 @@ class Item extends Model
             if ( ! isset($item->sym_pass)) {
                 return false;
             }
-            $iv = random_bytes(16); 
-            $val = openssl_encrypt($item->val, 'AES-256-CBC', $item->sym_pass, 0, $iv);
+            $bin_iv = random_bytes(16); 
+            $val = openssl_encrypt(serialize($item->val), DEF_METHOD, $item->sym_pass, 0, $bin_iv);
             $item->val = $val;
-            $item->iv = base64_encode($iv);
+            $item->iv = base64_encode($bin_iv);
         });
     }
 
@@ -39,8 +41,9 @@ class Item extends Model
         if ( ! isset($this->sym_pass)) {
             return false;
         }
-        $iv = base64_decode($this->iv);
-        return 'FIXME';
+        $bin_iv = base64_decode($this->iv);
+        $val = openssl_decrypt($this->val, DEF_METHOD, $this->sym_pass, 0, $bin_iv);
+        return unserialize($val);
     }
 
     /**
