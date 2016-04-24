@@ -6,5 +6,5 @@ Homestead.json
 .env
 
 # Ruslan K
-#composer.lock
+composer.lock
 *.sq3
