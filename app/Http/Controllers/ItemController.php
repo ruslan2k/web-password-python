@@ -33,13 +33,13 @@ class ItemController extends Controller
     }
 
 
-    public function store_RedBean (Request $request)
-    {
-        $item = R::dispense('item');
-        $item->name = $request->input('name');
-        $id = R::store($item);
-        return redirect()->route('item.show', ['id' => $id]);
-    }
+    //public function store_RedBean (Request $request)
+    //{
+    //    $item = R::dispense('item');
+    //    $item->name = $request->input('name');
+    //    $id = R::store($item);
+    //    return redirect()->route('item.show', ['id' => $id]);
+    //}
 
     public function store (Request $request)
     {
