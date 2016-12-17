@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Resource, Item
 from .forms import ResourceForm, ItemForm, DelItemForm
+from .encryption import symEncrypt_b64
 
 
 def getSymKey_b64(password, salt):
@@ -86,17 +87,19 @@ def index(request):
 @login_required(login_url='/account/login/')
 def detail(request, resource_id):
     resource = get_object_or_404(Resource, pk=resource_id)
+    print('sym_key: {}'.format(request.session['sym_key']))
     if request.method == 'POST':
         form = ItemForm(request.POST)
         if form.is_valid():
             item = Item(key=form.cleaned_data["item_key"], val=form.cleaned_data["item_val"],
                     resource_id=resource_id)
             item.save()
-            return HttpResponseRedirect("/resources/%s/" % resource_id)
+            return HttpResponseRedirect("/resources/{}/".format(resource_id))
     else:
         form = ItemForm()
     context = {"resource": resource, "form": form}
     return render(request, "resources/detail.html", context)
+
 
 def delete_item(request):
     pass
