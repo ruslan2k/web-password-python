@@ -1,0 +1,23 @@
+{{ resource }}
+
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="Add"/>
+</form>
+
+{% if resource.item_set.all %}
+  <ul>
+  {% for item in resource.item_set.all %}
+    <li>
+      {{ item.key }}:<input value="{{ item.val }}">
+      {{ item.id }}
+      <a href="{% url 'delete_item' resource_id=resource.id  item_id=item.pk %}">[x]</a>
+      {% comment %}
+      {% endcomment %}
+    </li>
+  {% endfor %}
+  </ul>
+{% else %}
+No items
+{% endif %}
