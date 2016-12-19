@@ -87,12 +87,14 @@ def index(request):
 @login_required(login_url='/account/login/')
 def detail(request, resource_id):
     resource = get_object_or_404(Resource, pk=resource_id)
-    print('sym_key: {}'.format(request.session['sym_key']))
+    sym_key = request.session['sym_key']
+    print('sym_key: {}'.format(sym_key))
     if request.method == 'POST':
         form = ItemForm(request.POST)
         if form.is_valid():
-            item = Item(key=form.cleaned_data["item_key"], val=form.cleaned_data["item_val"],
-                    resource_id=resource_id)
+            item = Item(resource_id=resource_id)
+            item.key = symEncrypt_b64(sym_key, form.cleaned_data["item_key"])
+            item.val = symEncrypt_b64(sym_key, form.cleaned_data["item_val"])
             item.save()
             return HttpResponseRedirect("/resources/{}/".format(resource_id))
     else:
