@@ -6,9 +6,9 @@
   <input type="submit" value="Add"/>
 </form>
 
-{% if resource.item_set.all %}
+{% if items %}
   <ul>
-  {% for item in resource.item_set.all %}
+  {% for item in items %}
     <li>
       {{ item.key }}:<input value="{{ item.val }}">
       {{ item.id }}

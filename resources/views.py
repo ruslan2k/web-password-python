@@ -10,7 +10,8 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Resource, Item
 from .forms import ResourceForm, ItemForm, DelItemForm
-from .encryption import symEncrypt_b64
+from .encryption import symEncrypt_b64, symDecrypt_b64
+
 
 
 def getSymKey_b64(password, salt):
@@ -60,7 +61,7 @@ def test(request):
     response = 'test<br>'
     if 'sym_key' in request.session:
         response += 'sym_key - exists'
-        print(request.session['sym_key'])
+        #print(request.session['sym_key'])
     else:
         response += 'sym_key - NOT exists'
     return HttpResponse(response)
@@ -73,7 +74,7 @@ def index(request):
         form = ResourceForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            pp.pprint(form.cleaned_data)
+            #pp.pprint(form.cleaned_data)
             resource = Resource(name=form.cleaned_data["resource_name"], user_id=request.user.id)
             resource.save()
             return HttpResponseRedirect('/resources')
@@ -88,7 +89,6 @@ def index(request):
 def detail(request, resource_id):
     resource = get_object_or_404(Resource, pk=resource_id)
     sym_key = request.session['sym_key']
-    print('sym_key: {}'.format(sym_key))
     if request.method == 'POST':
         form = ItemForm(request.POST)
         if form.is_valid():
@@ -99,8 +99,17 @@ def detail(request, resource_id):
             return HttpResponseRedirect("/resources/{}/".format(resource_id))
     else:
         form = ItemForm()
-    context = {"resource": resource, "form": form}
+        items = map(lambda i: decryptItem(sym_key, i), resource.item_set.all())
+    context = {"resource": resource, "form": form, "items": items}
     return render(request, "resources/detail.html", context)
+
+
+def decryptItem(key_b64, item):
+    return {
+            'pk': item.id,
+            'key': symDecrypt_b64(key_b64, item.key),
+            'val': symDecrypt_b64(key_b64, item.val),
+    }
 
 
 def delete_item(request):
