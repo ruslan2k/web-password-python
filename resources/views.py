@@ -64,7 +64,7 @@ def test(request):
         #print(request.session['sym_key'])
     else:
         response += 'sym_key - NOT exists'
-    return HttpResponse(response)
+    return render(request, "test/page.html")
 
 
 @login_required(login_url='/account/login/')
