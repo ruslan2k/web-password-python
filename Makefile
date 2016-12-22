@@ -11,3 +11,6 @@ dev.db: env
 	$(PYTHON) ./manage.py makemigrations resources 
 	$(PYTHON) ./manage.py migrate
 
+local:
+	heroku local web
+
