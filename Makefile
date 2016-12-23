@@ -14,3 +14,5 @@ dev.db: env
 local:
 	heroku local web
 
+push:
+	git push heroku master
