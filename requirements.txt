@@ -7,3 +7,4 @@ pinax-theme-bootstrap==7.10.1
 
 pycrypto==2.6.1
 gunicorn==19.6.0
+dj-database-url==0.4.1

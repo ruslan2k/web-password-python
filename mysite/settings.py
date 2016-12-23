@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
@@ -13,6 +14,8 @@ DATABASES = {
         "NAME": "dev.db",
     }
 }
+
+DATABASES["default"] = dj_database_url.config()
 
 ALLOWED_HOSTS = []
 
