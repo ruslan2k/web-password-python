@@ -23,3 +23,9 @@ local:
 
 push:
 	git push heroku master
+
+on:
+	heroku ps:scale web=1
+
+off:
+	heroku ps:scale web=0
