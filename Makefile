@@ -1,7 +1,11 @@
 PYTHON:=env/bin/python
 
-runserver: dev.db
-	env/bin/python ./manage.py runserver
+runserver:
+	gunicorn -b 0.0.0.0:8000 mysite.wsgi --log-file -
+	#env/bin/python ./manage.py runserver
+
+collectstatic:
+	env/bin/python ./manage.py collectstatic
 
 requirements:
 	apt-get install libpq-dev
