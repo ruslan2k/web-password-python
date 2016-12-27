@@ -1,8 +1,9 @@
 PYTHON:=env/bin/python
 
-runserver:
-	gunicorn -b 0.0.0.0:8000 mysite.wsgi --log-file -
-	#env/bin/python ./manage.py runserver
+runserver: dev.db
+	env/bin/gunicorn -b 0.0.0.0:8000 mysite.wsgi --log-file -
+django: dev.db
+	${PYTHON} ./manage.py runserver
 
 collectstatic:
 	env/bin/python ./manage.py collectstatic

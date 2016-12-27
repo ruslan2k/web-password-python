@@ -1,4 +1,5 @@
 import os
+import logging
 import dj_database_url
 
 
@@ -8,14 +9,19 @@ BASE_DIR = PACKAGE_ROOT
 
 DEBUG = True
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "dev.db",
-    }
-}
+DATABASES = {}
 
 DATABASES["default"] = dj_database_url.config()
+
+if not DATABASES["default"]:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": "dev.db",
+        }
+    }
+
+
 
 ALLOWED_HOSTS = []
 
