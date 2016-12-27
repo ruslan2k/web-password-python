@@ -40,12 +40,11 @@ class Item(models.Model):
         return self.key
 
 
-#@receiver(pre_save, sender=Item)
-#def save_encrypted_item(sender, instance, **kwargs):
-#    print('func: save_encrypted_item')
-#    print('sender: {}'.format(sender))
-#    print('instance: {}'.format(instance))
-#    instance.val = 'bla'
+class Group(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=250)
 
+    def __str__(self):
+        return self.name
 
 

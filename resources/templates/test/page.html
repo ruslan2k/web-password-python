@@ -6,10 +6,19 @@
 
 {% block body_class %}home{% endblock %}
 
+{% block extra_head %}
+    {% if user.is_authenticated %}
+    <div class="container">
+        <a href="/resources/">resources</a>
+    </div>
+    {% endif %}
+{% endblock %}
+
 {% block body_base %}
     <section class="jumbotron">
         <div class="container">
             {% include "_messages.html" %}
+            <a href="test">test</a>
             <h1>{% blocktrans %}Welcome to<br>pinax-project-account{% endblocktrans %}</h1>
             <p>
                 {% blocktrans %}

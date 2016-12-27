@@ -6,7 +6,6 @@ from django.views.generic import TemplateView
 from django.contrib import admin
 
 from resources.views import SignupView, LoginView
-#import resources.views
 
 
 urlpatterns = [
