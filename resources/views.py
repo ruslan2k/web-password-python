@@ -7,6 +7,7 @@ import os
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
 
 from .models import Resource, Item
 from .forms import ResourceForm, ItemForm, DelItemForm
@@ -19,6 +20,13 @@ def getSymKey_b64(password, salt):
     bin_pass = hashlib.sha256(password.encode('utf-8')).digest()
     bk = hashlib.pbkdf2_hmac('sha256', bin_pass, bin_salt, 100000)
     return base64.b64encode(bk).decode('ascii')
+
+
+class HomeView(TemplateView):
+    def get(self, request):
+        if request.user.is_authenticated():
+            return HttpResponseRedirect('/resources')
+        return render(request, 'homepage.html')
 
 
 class SignupView(account.views.SignupView):
@@ -55,6 +63,11 @@ class LoginView(account.views.LoginView):
         if 'sym_key' in self.request.session:
             print('secret exists')
         self.request.session['sym_key'] = sym_key
+
+
+@login_required(login_url='/account/login/')
+def groups_index(request):
+    return HttpResponse('groups_index')
 
 
 def test(request):
