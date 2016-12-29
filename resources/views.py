@@ -67,6 +67,10 @@ class LoginView(account.views.LoginView):
 
 @login_required(login_url='/account/login/')
 def groups_index(request):
+    if request.method == 'POST':
+        pass
+    else:
+        pass
     return HttpResponse('groups_index')
 
 
