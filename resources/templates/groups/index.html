@@ -10,10 +10,12 @@ Groups :: index
 </form>
 
 {% if groups %}
-  {{ groups }}
   <ul>
   {% for group in groups %}
-    <li>{{ group.name }}</li>
+    <li>
+      {{ group.storage.name }}
+      [ {{ group }} ]
+    </li>
   {% endfor %}
   </ul>
 {% else %}

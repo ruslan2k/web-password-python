@@ -1,12 +1,14 @@
-PYTHON:=env/bin/python
+PYTHON := env/bin/python
 
-runserver: dev.db
-	env/bin/gunicorn -b 0.0.0.0:8000 mysite.wsgi --log-file -
-django: dev.db
+
+dev: dev.db
 	${PYTHON} ./manage.py runserver
 
+prod: dev.db
+	env/bin/gunicorn -b 0.0.0.0:8000 mysite.wsgi --log-file -
+
 collectstatic:
-	env/bin/python ./manage.py collectstatic
+	${PYTHON} ./manage.py collectstatic
 
 requirements:
 	apt-get install libpq-dev
@@ -30,3 +32,4 @@ on:
 
 off:
 	heroku ps:scale web=0
+
