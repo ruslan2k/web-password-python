@@ -40,8 +40,8 @@ class Item(models.Model):
         return self.key
 
 
-class Group(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+class Storage(models.Model):
+    group = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
 
     def __str__(self):

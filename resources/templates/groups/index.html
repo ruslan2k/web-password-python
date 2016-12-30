@@ -1,0 +1,24 @@
+<html>
+<body>
+
+Groups :: index
+
+<form method="post">
+  {{ form }}
+  <input type="submit" value="Submit"/>
+  {% csrf_token %}
+</form>
+
+{% if groups %}
+  {{ groups }}
+  <ul>
+  {% for group in groups %}
+    <li>{{ group.name }}</li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No groups found.</p>
+{% endif %}
+
+</body>
+</html>

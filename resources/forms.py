@@ -12,3 +12,6 @@ class ItemForm(forms.Form):
 
 class DelItemForm(forms.Form):
     pass
+
+class GroupForm(forms.Form):
+    group_name = forms.CharField(label='Group name', max_length=100)

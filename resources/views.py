@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 
 from .models import Resource, Item
-from .forms import ResourceForm, ItemForm, DelItemForm
+from .forms import ResourceForm, ItemForm, DelItemForm, GroupForm
 from .encryption import symEncrypt_b64, symDecrypt_b64
 
 
@@ -67,11 +67,13 @@ class LoginView(account.views.LoginView):
 
 @login_required(login_url='/account/login/')
 def groups_index(request):
+    groups = request.user.groups.all()
     if request.method == 'POST':
-        pass
+        return HttpResponse('POST')
     else:
-        pass
-    return HttpResponse('groups_index')
+        form = GroupForm()
+    context = {"groups": groups, "form": form}
+    return render(request, "groups/index.html", context)
 
 
 def test(request):
