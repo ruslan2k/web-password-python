@@ -86,6 +86,11 @@ def groups_index(request):
     return render(request, "groups/index.html", context)
 
 
+@login_required(login_url='/account/login/')
+def groups_detail(request, group_id):
+    return HttpResponse(group_id)
+
+
 def test(request):
     response = 'test<br>'
     if 'sym_key' in request.session:

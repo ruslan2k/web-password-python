@@ -24,7 +24,8 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 
 class Resource(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    #user = models.ForeignKey(User, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
 
     def __str__(self):

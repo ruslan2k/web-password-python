@@ -13,7 +13,7 @@ Groups :: index
   <ul>
   {% for group in groups %}
     <li>
-      {{ group.storage.name }}
+      <a href="/resources/groups/{{ group.pk }}">{{ group.storage.name }}</a>
       [ {{ group }} ]
     </li>
   {% endfor %}
