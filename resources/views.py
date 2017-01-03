@@ -88,7 +88,12 @@ def groups_index(request):
 
 @login_required(login_url='/account/login/')
 def groups_detail(request, group_id):
-    return HttpResponse(group_id)
+    group = get_object_or_404(Group, pk=group_id)
+    if request.method == 'POST':
+        return HttpResponse(group_id)
+    resources = Resource(group_id=group_id)
+    context = {"resources": resources}
+    return HttpResponse('TODO group_id={}'.format(group_id)) # TODO
 
 
 def test(request):
