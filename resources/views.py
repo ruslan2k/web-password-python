@@ -27,7 +27,7 @@ def getSymKey_b64(password, salt):
 class HomeView(TemplateView):
     def get(self, request):
         if request.user.is_authenticated():
-            return HttpResponseRedirect('/resources')
+            return HttpResponseRedirect('/resources/groups')
         return render(request, 'homepage.html')
 
 
@@ -91,9 +91,9 @@ def groups_detail(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     if request.method == 'POST':
         return HttpResponse(group_id)
-    resources = Resource(group_id=group_id)
+    resources = group.resource_set.all()
     context = {"resources": resources}
-    return HttpResponse('TODO group_id={}'.format(group_id)) # TODO
+    return render(request, "groups/detail.html", context)
 
 
 def test(request):

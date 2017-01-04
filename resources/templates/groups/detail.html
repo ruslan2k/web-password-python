@@ -1,0 +1,19 @@
+{% if resources %}
+  <ul>
+  {% for resource in resources %}
+    <li>
+      <a href="/resources/{{ resource.pk }}">{{ resource }}</a>
+      group_id={{ resource.group_id }}
+      {% comment %}
+      {% endcomment %}
+    </li>
+  {% endfor %}
+  </ul>
+{% else %}
+No resources
+{% endif %}
+<pre>
+  {% comment %}
+    {% debug %}
+  {% endcomment %}
+</pre>
