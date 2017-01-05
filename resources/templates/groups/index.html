@@ -10,14 +10,9 @@ Groups :: index
 </form>
 
 {% if groups %}
-  <ul>
   {% for group in groups %}
-    <li>
       <a href="/resources/groups/{{ group.pk }}">{{ group.storage.name }}</a>
-      [ {{ group }} ]
-    </li>
   {% endfor %}
-  </ul>
 {% else %}
   <p>No groups found.</p>
 {% endif %}
