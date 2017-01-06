@@ -90,9 +90,14 @@ def groups_index(request):
 def groups_detail(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     if request.method == 'POST':
-        return HttpResponse(group_id)
-    resources = group.resource_set.all()
+        form = ResourceForm(request.POST)
+        if form.is_valid():
+            resource = Resource(name=form.cleaned_data["name"],
+                    url=form.cleaned_data["url"], group_id=group.id)
+            resource.save()
+            return HttpResponseRedirect('/resources/groups/{}'.format(group.id))
     form = ResourceForm()
+    resources = group.resource_set.all()
     context = {"form": form, "group": group, "resources": resources}
     return render(request, "groups/detail.html", context)
 
@@ -135,6 +140,7 @@ def detail(request, resource_id):
             item = Item(resource_id=resource_id)
             item.key = symEncrypt_b64(sym_key, form.cleaned_data["item_key"])
             item.val = symEncrypt_b64(sym_key, form.cleaned_data["item_val"])
+            # TODO
             item.save()
             return HttpResponseRedirect("/resources/{}/".format(resource_id))
     else:

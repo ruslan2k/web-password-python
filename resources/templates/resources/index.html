@@ -14,7 +14,10 @@ Resources :: index
 {% if resources %}
   <ul>
   {% for resource in resources %}
-    <li><a href="/resources/{{ resource.id }}">{{ resource.name }}</a></li>
+    <li>
+      <a href="/resources/{{ resource.id }}">{{ resource.name }}</a>
+      <a href="{{ resource.url }}">{{ resource.url }}</a>
+    </li>
   {% endfor %}
   </ul>
 {% else %}

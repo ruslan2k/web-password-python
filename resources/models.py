@@ -24,9 +24,9 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 
 class Resource(models.Model):
-    #user = models.ForeignKey(User, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
+    url = models.CharField(max_length=250, null=True)
 
     def __str__(self):
         return self.name
@@ -36,6 +36,7 @@ class Item(models.Model):
     resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
     key = models.CharField(max_length=250)
     val = models.CharField(max_length=250)
+    url = models.CharField(max_length=250, null=True)
 
     def __str__(self):
         return self.key
