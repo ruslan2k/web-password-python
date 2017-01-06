@@ -1,9 +1,16 @@
+<a href="..">Groups</a> &gt; {{ group.storage.name }}
+
+<form method="post">
+  {{ form }}
+  <input type="submit" value="Submit"/>
+  {% csrf_token %}
+</form>
+
 {% if resources %}
   <ul>
   {% for resource in resources %}
     <li>
       <a href="/resources/{{ resource.pk }}">{{ resource }}</a>
-      group_id={{ resource.group_id }}
       {% comment %}
       {% endcomment %}
     </li>

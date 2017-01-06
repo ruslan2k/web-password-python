@@ -92,7 +92,8 @@ def groups_detail(request, group_id):
     if request.method == 'POST':
         return HttpResponse(group_id)
     resources = group.resource_set.all()
-    context = {"resources": resources}
+    form = ResourceForm()
+    context = {"form": form, "group": group, "resources": resources}
     return render(request, "groups/detail.html", context)
 
 
