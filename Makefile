@@ -2,7 +2,7 @@ PYTHON := env/bin/python
 
 
 dev: dev.db
-	${PYTHON} ./manage.py runserver
+	${PYTHON} ./manage.py runserver 0.0.0.0:8000
 
 prod: dev.db
 	env/bin/gunicorn -b 0.0.0.0:8000 mysite.wsgi --log-file -
