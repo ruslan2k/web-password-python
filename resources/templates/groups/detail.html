@@ -1,10 +1,16 @@
-<a href="..">Groups</a> &gt; {{ group.storage.name }}
+{% extends 'base.html' %}
 
-<form method="post">
-  {{ form }}
-  <input type="submit" value="Add"/>
-  {% csrf_token %}
-</form>
+{% block content %}
+
+  &gt; <a href="..">Groups</a> &gt; {{ group.storage.name }}
+  
+  <div>
+    <form method="post">
+      {{ form }}
+      <input type="submit" value="Add"/>
+      {% csrf_token %}
+    </form>
+  </div>
 
 {% if resources %}
   <ul>
@@ -24,3 +30,5 @@ No resources
     {% debug %}
   {% endcomment %}
 </pre>
+
+{% endblock %}

@@ -13,7 +13,7 @@
   
   {% if groups %}
     {% for group in groups %}
-        <a href="/resources/groups/{{ group.pk }}">{{ group.storage.name }}</a>
+      <a href="/resources/groups/{{ group.pk }}">{{ group.storage.name }}</a>
     {% endfor %}
   {% else %}
     <p>No groups found.</p>
