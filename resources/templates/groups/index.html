@@ -1,21 +1,22 @@
-<html>
-<body>
+{% extends 'base.html' %}
 
-Groups :: index
+{% block content %}
+ &gt; Groups
+  
+  <div>
+    <form method="post">
+      {{ form }}
+      <input type="submit" value="Submit"/>
+      {% csrf_token %}
+    </form>
+  </div>
+  
+  {% if groups %}
+    {% for group in groups %}
+        <a href="/resources/groups/{{ group.pk }}">{{ group.storage.name }}</a>
+    {% endfor %}
+  {% else %}
+    <p>No groups found.</p>
+  {% endif %}
 
-<form method="post">
-  {{ form }}
-  <input type="submit" value="Submit"/>
-  {% csrf_token %}
-</form>
-
-{% if groups %}
-  {% for group in groups %}
-      <a href="/resources/groups/{{ group.pk }}">{{ group.storage.name }}</a>
-  {% endfor %}
-{% else %}
-  <p>No groups found.</p>
-{% endif %}
-
-</body>
-</html>
+{% endblock %}
