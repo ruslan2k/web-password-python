@@ -21,6 +21,15 @@ dev.db:
 	$(PYTHON) ./manage.py makemigrations resources 
 	$(PYTHON) ./manage.py migrate
 
+db_info:
+	heroku addons | grep -i POSTGRES
+	heroku config -s | grep DATABASE
+	heroku pg:info
+
+dump:
+	heroku pg:backups:capture
+	heroku pg:backups:download
+
 local:
 	heroku local web
 
