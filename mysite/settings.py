@@ -8,6 +8,7 @@ PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
 BASE_DIR = PACKAGE_ROOT
 
 DEBUG = False
+SECURE_SSL_REDIRECT = True
 
 DATABASES = {}
 
