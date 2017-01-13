@@ -1,17 +1,21 @@
 {% load staticfiles %}
-<html>
+<!doctype html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
   <title>Password storage</title>
   <link rel="stylesheet" href="{% static 'css/pure-min.css' %}">
   <link rel="stylesheet" href="{% static 'site/main.css' %}">
 </head>
 <body>
 
-    <a href="/">Home</a>
-
+  <a href="/">Home</a>
 
   {% block content %}
   {% endblock %}
+
+  {{ user }}
+  {{ user.is_authenticated }}
 
 </body>
 <html>
