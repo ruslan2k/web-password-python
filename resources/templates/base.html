@@ -10,12 +10,15 @@
 <body>
 
   <a href="/">Home</a>
+  {% if user.is_authenticated %} <a href="/account/logout/">Log out</a> {% endif %}
 
   {% block content %}
   {% endblock %}
 
+  <!--
   {{ user }}
   {{ user.is_authenticated }}
+  -->
 
 </body>
 <html>
