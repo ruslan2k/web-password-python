@@ -16,7 +16,7 @@
   <ul>
   {% for item in items %}
     <li>
-      {{ item.key }}:<input value="{{ item.val }}">
+      {{ item.key }}:<input class="secret" value="{{ item.val }}">
       {{ item.id }}
       <a href="{% url 'delete_item' resource_id=resource.id  item_id=item.pk %}">[x]</a>
       {% comment %}
