@@ -3,6 +3,7 @@
 {% block content %}
 
 Resources &gt; {{ resource }}
+Resources &gt; {{ resource.group_id }}
 
 <form method="post">
   {% csrf_token %}
