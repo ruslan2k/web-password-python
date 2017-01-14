@@ -1,4 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
 {{ resource }}
+
 
 <form method="post">
   {% csrf_token %}
@@ -21,3 +27,5 @@
 {% else %}
 No items
 {% endif %}
+
+{% endblock %}
