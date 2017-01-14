@@ -2,8 +2,7 @@
 
 {% block content %}
 
-Resources &gt; {{ resource }}
-Resources &gt; {{ resource.group_id }}
+<a href="/resources/groups/{{ resource.group_id }}">Resources</a> &gt; {{ resource }}
 
 <form method="post">
   {% csrf_token %}
