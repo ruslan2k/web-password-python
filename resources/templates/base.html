@@ -1,65 +1,81 @@
 {% load staticfiles %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Password storage</title>
-  <link rel="stylesheet" href="{% static 'css/pure-min.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'site/main.css' %}">
-  <link rel="stylesheet" href="{% static 'site/side-menu.css' %}">
+
 </head>
 <body>
 
-<div id="layout">
-  <!-- Menu toggle -->
-  <a href="#menu" id="menuLink" class="menu-link">
-      <!-- Hamburger icon -->
-      <span></span>
-  </a>
-  <div id="menu">
-      <div class="pure-menu">
-          <a class="pure-menu-heading" href="/">Home</a>
-
-          <ul class="pure-menu-list">
-              <li class="pure-menu-item"><a href="#" class="pure-menu-link">Home</a></li>
-              <li class="pure-menu-item"><a href="#" class="pure-menu-link">About</a></li>
-
-              <li class="pure-menu-item" class="menu-item-divided pure-menu-selected">
-                  <a href="#" class="pure-menu-link">Services</a>
-              </li>
-
-              <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a></li>
-
-  {% if user.is_authenticated %}
-              <li class="pure-menu-item">
-                <a href="/account/logout/" class="pure-menu-link">Log out</a>
-              </li>
-  {% endif %}
-          </ul>
+  <!-- Navigation -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Start Bootstrap</a>
       </div>
-  </div>
-
-  <div id="main">
-    <div class="header">
-      <h1>Page Title</h1>
-      <h2>A subtitle for your page goes here</h2>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Services</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+{% if user.is_authenticated %}
+            <li>
+              <a href="/account/logout/">Log out</a>
+            </li>
+{% endif %}
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
     </div>
+    <!-- /.container -->
+  </nav>
 
-    <div class="content">
-      <h2 class="content-subhead">Content</h2>
-      <p>
+<!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>A Bootstrap Starter Template</h1>
+                <p class="lead">Complete with pre-defined file paths that you won't have to change!!</p>
 
        {% block content %}
        {% endblock %}
 
-      </p>
-    </div>
-  </div>
+                <ul class="list-unstyled">
+                    <li>Bootstrap v3.3.7</li>
+                    <li>jQuery v1.11.1</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.row -->
 
-  <!--
-  {{ user }}
-  {{ user.is_authenticated }}
-  -->
+    </div>
+    <!-- /.container -->
 
 </div>
 </body>
