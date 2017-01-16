@@ -9,7 +9,7 @@
 
   <title>Password storage</title>
 
-  <link rel="stylesheet" href="{% static 'css/basscss.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/spectre.min.css' %}">
   <link rel="stylesheet" href="{% static 'site/main.css' %}">
   <style>
   </style>
@@ -18,21 +18,16 @@
 <body>
 
   <!-- Navigation -->
-  <nav class="navigation">
-    <section class="container">
-      <a class="navigation-title" href="/">My Passwords</a>
-      <ul class="navigation-list float-right">
-        <li>
-          <a href="/">Home</a>
-        </li>
-        {% if user.is_authenticated %}
-        <li>
-          <a href="/account/logout/">Log out</a>
-        </li>
-        {% endif %}
-      </ul>
+  <header class="navbar">
+    <section class="navbar-section">
+      <a href="/" class="navbar-brand">My Passwords</a>
     </section>
-  </nav>
+    <section class="navbar-section">
+    {% if user.is_authenticated %}
+      <a href="/account/logout/" class="btn btn-link">Log out</a>
+    {% endif %}
+    </section>
+  </header>
 
 <!-- Page Content -->
     <div class="container">
