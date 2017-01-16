@@ -9,59 +9,29 @@
 
   <title>Password storage</title>
 
-  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/milligram.min.css' %}">
   <link rel="stylesheet" href="{% static 'site/main.css' %}">
   <style>
-    #navbar-toggle-cbox {
-      display:none
-    }
-    #navbar-toggle-cbox:checked ~ .collapse {
-      display: block;
-    }
   </style>
 
 </head>
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <input type="checkbox" id="navbar-toggle-cbox">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <label for="navbar-toggle-cbox" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </label>
-        <a class="navbar-brand" href="/">My Passwords</a>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="/">Home</a>
-            </li>
-            <li>
-                <a href="#">About</a>
-            </li>
-            <li>
-                <a href="#">Services</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-{% if user.is_authenticated %}
-            <li>
-              <a href="/account/logout/">Log out</a>
-            </li>
-{% endif %}
-        </ul>
-      </div>
-      <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
+  <nav class="navigation">
+    <section class="container">
+      <a class="navigation-title" href="/">My Passwords</a>
+      <ul class="navigation-list float-right">
+        <li class="navigation-item">
+            <a href="/" class="navigation-link">Home</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="navigation-item">
+            <a href="/account/logout/" class="navigation-link">Log out</a>
+        </li>
+        {% endif %}
+      </ul>
+    </section>
   </nav>
 
 <!-- Page Content -->
