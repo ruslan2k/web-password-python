@@ -22,11 +22,11 @@
     <section class="container">
       <a class="navigation-title" href="/">My Passwords</a>
       <ul class="navigation-list float-right">
-        <li class="navigation-item">
+        <li>
           <a href="/">Home</a>
         </li>
         {% if user.is_authenticated %}
-        <li class="navigation-item">
+        <li>
           <a href="/account/logout/">Log out</a>
         </li>
         {% endif %}
