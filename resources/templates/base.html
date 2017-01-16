@@ -17,24 +17,25 @@
 </head>
 <body>
 
-  <!-- Navigation -->
-  <header class="navbar">
-    <section class="navbar-section">
-      <a href="/" class="navbar-brand">My Passwords</a>
-    </section>
-    <section class="navbar-section">
-    {% if user.is_authenticated %}
-      <a href="/account/logout/" class="btn btn-link">Log out</a>
-    {% endif %}
-    </section>
-  </header>
+  <section class="section grid-960">
+    <!-- Navigation -->
+    <header class="navbar">
+      <section class="navbar-section">
+        <a href="/" class="navbar-brand">My Passwords</a>
+      </section>
+      <section class="navbar-section">
+      {% if user.is_authenticated %}
+        <a href="/account/logout/" class="btn btn-link">Log out</a>
+      {% endif %}
+      </section>
+    </header>
+  </section>
 
 <!-- Page Content -->
     <div class="container">
 
         <div class="row">
             <div class="col-lg-12">
-                <h1>page header</h1>
 
        {% block content %}
        {% endblock %}
@@ -46,6 +47,5 @@
     </div>
     <!-- /.container -->
 
-</div>
 </body>
 <html>
