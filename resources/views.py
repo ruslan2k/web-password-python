@@ -158,5 +158,11 @@ def decryptItem(key_b64, item):
     }
 
 
+def delete_resource(request, resource_id):
+    resource = get_object_or_404(Resource, pk=resource_id)
+    if request.method == 'POST':
+        #form = DeleteResourceForm(request.POST)
+        pass
+
 def delete_item(request):
     pass
