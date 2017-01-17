@@ -5,6 +5,8 @@ class ResourceForm(forms.Form):
     name = forms.CharField(label='name', max_length=100)
     url  = forms.CharField(label='url',  max_length=250, required=False)
 
+class DeleteResourceForm(forms.Form):
+    pass
 
 class ItemForm(forms.Form):
     item_key = forms.CharField(label='key', max_length=100)

@@ -12,7 +12,7 @@ from django.contrib.auth.models import Group
 from django.views.generic import TemplateView
 
 from .models import Resource, Item, Storage
-from .forms import ResourceForm, ItemForm, DelItemForm, GroupForm
+from .forms import ResourceForm, ItemForm, DelItemForm, GroupForm, DeleteResourceForm
 from .encryption import symEncrypt_b64, symDecrypt_b64
 
 
@@ -140,7 +140,6 @@ def detail(request, resource_id):
             item = Item(resource_id=resource_id)
             item.key = symEncrypt_b64(sym_key, form.cleaned_data["item_key"])
             item.val = symEncrypt_b64(sym_key, form.cleaned_data["item_val"])
-            # TODO
             item.save()
             return HttpResponseRedirect("/resources/{}/".format(resource_id))
     else:
@@ -160,9 +159,16 @@ def decryptItem(key_b64, item):
 
 def delete_resource(request, resource_id):
     resource = get_object_or_404(Resource, pk=resource_id)
+    group_id = resource.group_id
     if request.method == 'POST':
-        #form = DeleteResourceForm(request.POST)
-        pass
+        form = DeleteResourceForm(request.POST)
+        if form.is_valid():
+            resource.delete()
+            return HttpResponseRedirect("/resources/groups/{}".format(group_id))
+    form = DeleteResourceForm()
+    context = {"resource": resource, "form": form}
+    return render(request, "resources/delete.html", context)
+
 
 def delete_item(request):
     pass
