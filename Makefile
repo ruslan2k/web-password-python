@@ -1,5 +1,6 @@
 PYTHON := env/bin/python
 
+include .env
 
 dev: dev.db
 	${PYTHON} ./manage.py runserver 0.0.0.0:8000
@@ -27,6 +28,8 @@ db_info:
 	heroku pg:info
 
 dump:
+	pg_dump ${DB_NAME}
+	/bin/false
 	heroku pg:backups:capture
 	heroku pg:backups:download
 

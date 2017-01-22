@@ -1,16 +1,20 @@
 import os
 import logging
 import dj_database_url
+import dotenv
 
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
 BASE_DIR = PACKAGE_ROOT
 
-DEBUG = False
-#DEBUG = True
+dotenv.load_dotenv(os.path.join(os.path.dirname(__file__), '../.env'))
+
+DEBUG = bool(os.environ.get('DEBUG', False))
+
 SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_AGE = 60
+SESSION_COOKIE_AGE = 9 * 3600
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 DATABASES = {}
 
@@ -23,7 +27,6 @@ if not DATABASES["default"]:
             "NAME": "dev.db",
         }
     }
-
 
 
 ALLOWED_HOSTS = ['*']

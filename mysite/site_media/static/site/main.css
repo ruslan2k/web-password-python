@@ -1,9 +1,11 @@
 .secret {
-    background-color: black;
-    color: blue;
+    background-color: gray;
+    color: black;
 }
 
+/*
 input[type=text] {
     background-color: black;
     color: blue;
 }
+*/
