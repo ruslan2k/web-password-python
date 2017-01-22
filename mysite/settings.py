@@ -8,8 +8,9 @@ PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
 BASE_DIR = PACKAGE_ROOT
 
 DEBUG = False
-DEBUG = True
+#DEBUG = True
 SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_AGE = 60
 
 DATABASES = {}
 
