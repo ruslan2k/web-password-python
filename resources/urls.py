@@ -12,6 +12,6 @@ urlpatterns = [
     url(r'^groups/$', views.groups_index, name='groups_index'),
     url(r'^groups/(?P<group_id>[0-9]+)/$', views.groups_detail, name='groups_detail'),
     # /resources/test/
-    url(r'^test/$', views.test, name='test'),
+    #`url(r'^test/$', views.test, name='test'),
 ]
 

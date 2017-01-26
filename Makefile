@@ -1,12 +1,12 @@
-PYTHON := env/bin/python
+PYTHON := venv/bin/python
 
-include .env
+-include .env
 
 dev: dev.db
 	${PYTHON} ./manage.py runserver 0.0.0.0:8000
 
 prod: dev.db
-	env/bin/gunicorn -b 0.0.0.0:8000 mysite.wsgi --log-file -
+	venv/bin/gunicorn -b 0.0.0.0:8000 mysite.wsgi --log-file -
 
 collectstatic:
 	${PYTHON} ./manage.py collectstatic
@@ -14,11 +14,11 @@ collectstatic:
 requirements:
 	apt-get install libpq-dev
 
-env:
-	virtualenv -p python3 env
-	env/bin/pip install -r requirements.txt
+venv:
+	virtualenv -p python3 venv
+	venv/bin/pip install -r requirements.txt
 
-dev.db:
+dev.db: venv
 	$(PYTHON) ./manage.py makemigrations resources 
 	$(PYTHON) ./manage.py migrate
 

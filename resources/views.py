@@ -102,16 +102,6 @@ def groups_detail(request, group_id):
     return render(request, "groups/detail.html", context)
 
 
-def test(request):
-    response = 'test<br>'
-    if 'sym_key' in request.session:
-        response += 'sym_key - exists'
-        #print(request.session['sym_key'])
-    else:
-        response += 'sym_key - NOT exists'
-    return render(request, "test/page.html")
-
-
 @login_required(login_url='/account/login/')
 def index(request):
     if request.method == 'POST':
