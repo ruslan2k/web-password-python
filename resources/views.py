@@ -147,6 +147,7 @@ def decryptItem(key_b64, item):
         'pk': item.id,
         'key': symDecrypt_b64(key_b64, item.key),
         'val': symDecrypt_b64(key_b64, item.val),
+        'url': symDecrypt_b64(key_b64, item.url),
     }
 
 

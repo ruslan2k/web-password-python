@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<!-- resources :: detail -->
+
 <a href="/resources/groups/{{ resource.group_id }}">Resources</a> &gt; {{ resource }}
 
 <form method="post">
@@ -14,13 +16,14 @@
   <ul>
   {% for item in items %}
     <li>
-      {{ item.key }}:<input class="secret" value="{{ item.val }}">
-      {{ item.id }}
+      {{ item.key }} <input class="secret" value="{{ item.val }}">
+      <a href="{{ item.url }}">[link]</a>
+      <span>{{ item.id }}</span>
       <a href="{% url 'delete_item' resource_id=resource.id  item_id=item.pk %}">[x]</a>
-      {% comment %}
-      {% endcomment %}
     </li>
   {% endfor %}
+  {% comment %}
+  {% endcomment %}
   </ul>
 {% else %}
 No items
