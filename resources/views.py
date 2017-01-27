@@ -5,7 +5,7 @@ import pprint as pp
 import os
 import uuid
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
@@ -123,6 +123,8 @@ def index(request):
 @login_required(login_url='/account/login/')
 def detail(request, resource_id):
     resource = get_object_or_404(Resource, pk=resource_id)
+    if not request.user.groups.filter(pk=resource.group_id).exists():
+        raise Http404
     sym_key = request.session['sym_key']
     if request.method == 'POST':
         form = ItemForm(request.POST)
@@ -130,6 +132,7 @@ def detail(request, resource_id):
             item = Item(resource_id=resource_id)
             item.key = symEncrypt_b64(sym_key, form.cleaned_data["item_key"])
             item.val = symEncrypt_b64(sym_key, form.cleaned_data["item_val"])
+            item.url = symEncrypt_b64(sym_key, form.cleaned_data["item_url"])
             item.save()
             return HttpResponseRedirect("/resources/{}/".format(resource_id))
     else:
@@ -141,9 +144,9 @@ def detail(request, resource_id):
 
 def decryptItem(key_b64, item):
     return {
-            'pk': item.id,
-            'key': symDecrypt_b64(key_b64, item.key),
-            'val': symDecrypt_b64(key_b64, item.val),
+        'pk': item.id,
+        'key': symDecrypt_b64(key_b64, item.key),
+        'val': symDecrypt_b64(key_b64, item.val),
     }
 
 
