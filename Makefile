@@ -1,6 +1,8 @@
-PYTHON := venv/bin/python
+PYTHON:=venv/bin/python
+TS:=$(shell date +%FT%T)
 
 -include .env
+export $(shell sed 's/=.*//' .env)
 
 dev: dev.db
 	${PYTHON} ./manage.py runserver 0.0.0.0:8000
@@ -28,8 +30,7 @@ db_info:
 	heroku pg:info
 
 dump:
-	pg_dump ${DB_NAME}
-	/bin/false
+	pg_dump ${PGDATABASE} >> pg_dump.$(TS).sql
 	heroku pg:backups:capture
 	heroku pg:backups:download
 
