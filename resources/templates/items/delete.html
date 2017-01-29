@@ -1,3 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- itemss :: delete -->
+
+{{ item.pk }}
+
 <form method="post">{% csrf_token %}
+
   <input type="submit" value="Delete">
 </form>
+
+{% endblock %}
