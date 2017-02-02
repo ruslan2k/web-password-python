@@ -1,51 +1,67 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Web password</title>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
-  <title>Password storage</title>
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <link rel="stylesheet" href="{% static 'css/spectre.min.css' %}">
-  <link rel="stylesheet" href="{% static 'site/main.css' %}">
-  <style>
-  </style>
+    <!-- Include the compiled Ratchet CSS -->
+    <link href="{% static 'css/ratchet.min.css' %}" rel="stylesheet">
 
-</head>
-<body>
+    <!-- Include the compiled Ratchet JS -->
+    <script src="{% static 'js/ratchet.min.js' %}"></script>
+  </head>
+  <body>
 
-  <section class="section grid-960">
-    <!-- Navigation -->
-    <header class="navbar">
-      <section class="navbar-section">
-        <a href="/" class="navbar-brand">My Passwords</a>
-      </section>
-      <section class="navbar-section">
+    <!-- Make sure all your bars are the first things in your <body> -->
+    <header class="bar bar-nav">
+      <h1 class="title">Ratchet</h1>
+
       {% if user.is_authenticated %}
         <a href="/account/logout/" class="btn btn-link">Log out</a>
       {% endif %}
-      </section>
+     
     </header>
-  </section>
 
-<!-- Page Content -->
-    <div class="container">
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+    <div class="content">
 
-        <div class="row">
-            <div class="col-lg-12">
+      {% block content %}
+      {% endblock %}
 
-       {% block content %}
-       {% endblock %}
-
-            </div>
-        </div>
-        <!-- /.row -->
-
+      <p class="content-padded">Thanks for downloading Ratchet.</p>
+      <div class="card">
+        <ul class="table-view">
+          <li class="table-view-cell">
+            <a class="push-right" href="http://goratchet.com">
+              <strong>Ratchet documentation</strong>
+            </a>
+          </li>
+          <li class="table-view-cell">
+            <a class="push-right" href="https://github.com/twbs/ratchet/">
+              <strong>Ratchet on Github</strong>
+            </a>
+          </li>
+          <li class="table-view-cell">
+            <a class="push-right" href="https://groups.google.com/forum/#!forum/goratchet">
+              <strong>Ratchet Google group</strong>
+            </a>
+          </li>
+          <li class="table-view-cell">
+            <a class="push-right" href="https://twitter.com/goratchet">
+              <strong>Ratchet on Twitter</strong>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <!-- /.container -->
 
-</body>
-<html>
+  </body>
+</html>
