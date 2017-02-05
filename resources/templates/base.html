@@ -2,69 +2,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Web password</title>
 
-    <!-- Sets initial viewport load and disables zooming  -->
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-
-    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-    <!-- Include the compiled Ratchet CSS -->
-    <link href="{% static 'css/ratchet.min.css' %}" rel="stylesheet">
+    <link href="//mincss.com/entireframework.min.css" rel="stylesheet" type="text/css">
 
     <link href="{% static 'site/main.css' %}" rel="stylesheet">
-
-    <!-- Include the compiled Ratchet JS -->
-    <!--
-    <script src="{% static 'js/ratchet.min.js' %}"></script>
-    -->
   </head>
   <body>
-
-    <!-- Make sure all your bars are the first things in your <body> -->
-    <header class="bar bar-nav">
-      <h1 class="title">Ratchet</h1>
-
+    <nav class="nav" tabindex="-1" onclick="this.focus()">
+      <div class="container">
+        <a class="pagename current" href="/">Your Site Name</a>
       {% if user.is_authenticated %}
+        <a href="#">Orgs</a> 
+        <a href="/">Grops</a>
         <a href="/account/logout/" class="btn btn-link">Log out</a>
       {% endif %}
      
-    </header>
-
-    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
-    <div class="content">
-
+      </div>
+    </nav>
+    <button class="btn-close btn btn-sm">×</button>
+    <div class="container">
+ 
       {% block content %}
       {% endblock %}
 
-      <p class="content-padded">Thanks for downloading Ratchet.</p>
-      <div class="card">
-        <ul class="table-view">
-          <li class="table-view-cell">
-            <a class="push-right" href="http://goratchet.com">
-              <strong>Ratchet documentation</strong>
-            </a>
-          </li>
-          <li class="table-view-cell">
-            <a class="push-right" href="https://github.com/twbs/ratchet/">
-              <strong>Ratchet on Github</strong>
-            </a>
-          </li>
-          <li class="table-view-cell">
-            <a class="push-right" href="https://groups.google.com/forum/#!forum/goratchet">
-              <strong>Ratchet Google group</strong>
-            </a>
-          </li>
-          <li class="table-view-cell">
-            <a class="push-right" href="https://twitter.com/goratchet">
-              <strong>Ratchet on Twitter</strong>
-            </a>
-          </li>
-        </ul>
-      </div>
     </div>
 
   </body>
