@@ -14,11 +14,11 @@
   <body>
     <nav class="nav" tabindex="-1" onclick="this.focus()">
       <div class="container">
-        <a class="pagename current" href="/">Your Site Name</a>
+        <a class="pagename current" href="/">Secure store</a>
       {% if user.is_authenticated %}
         <a href="#">Orgs</a> 
         <a href="/">Grops</a>
-        <a href="/account/logout/" class="btn btn-link">Log out</a>
+        <a href="/account/logout/">Log out</a>
       {% endif %}
      
       </div>
