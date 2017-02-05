@@ -25,9 +25,13 @@
     </nav>
     <button class="btn-close btn btn-sm">×</button>
     <div class="container">
+
+    {% block navigation %}
+    {% endblock %}
+
  
-      {% block content %}
-      {% endblock %}
+    {% block content %}
+    {% endblock %}
 
     </div>
 
