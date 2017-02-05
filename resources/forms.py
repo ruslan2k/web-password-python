@@ -6,6 +6,10 @@ class ResourceForm(forms.Form):
     url  = forms.CharField(label='url',  max_length=250, required=False)
 
 
+class DeleteForm(forms.Form):
+    pass
+
+
 class DeleteResourceForm(forms.Form):
     pass
 
@@ -13,7 +17,6 @@ class DeleteResourceForm(forms.Form):
 class ItemForm(forms.Form):
     item_key = forms.CharField(label='key', max_length=100)
     item_val = forms.CharField(label='val', max_length=100)
-    #item_url = forms.CharField(label='url', max_length=250, required=False)
 
 
 class DeleteItemForm(forms.Form):

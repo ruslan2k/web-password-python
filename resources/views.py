@@ -12,7 +12,7 @@ from django.contrib.auth.models import Group
 from django.views.generic import TemplateView
 
 from .models import Resource, Item, Storage
-from .forms import ResourceForm, ItemForm, DeleteItemForm, GroupForm, DeleteResourceForm
+from .forms import ResourceForm, ItemForm, GroupForm, DeleteForm
 from .encryption import symEncrypt_b64, symDecrypt_b64
 
 
@@ -103,6 +103,21 @@ def groups_detail(request, group_id):
 
 
 @login_required(login_url='/account/login/')
+def groups_delete(request, group_id):
+    if not request.user.groups.filter(pk=group_id).exists():
+        raise Http404
+    group = get_object_or_404(Group, pk=group_id)
+    if request.method == 'POST':
+        form = DeleteForm(request.POST)
+        if form.is_valid():
+            group.delete()
+            return HttpResponseRedirect("/resources/groups/")
+    form = DeleteForm()
+    context = {"group": group, "form": form}
+    return render(request, "groups/delete.html", context)
+
+
+@login_required(login_url='/account/login/')
 def index(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -155,11 +170,11 @@ def delete_resource(request, resource_id):
         raise Http404
     group_id = resource.group_id
     if request.method == 'POST':
-        form = DeleteResourceForm(request.POST)
+        form = DeleteForm(request.POST)
         if form.is_valid():
             resource.delete()
             return HttpResponseRedirect("/resources/groups/{}".format(group_id))
-    form = DeleteResourceForm()
+    form = DeleteForm()
     context = {"resource": resource, "form": form}
     return render(request, "resources/delete.html", context)
 
@@ -170,11 +185,11 @@ def delete_item(request, item_id):
     if not request.user.groups.filter(pk=resource.group_id).exists():
         raise Http404
     if request.method == 'POST':
-        form = DeleteItemForm(request.POST)
+        form = DeleteForm(request.POST)
         if form.is_valid():
             item.delete()
             return HttpResponseRedirect("/resources/{}".format(resource.pk))
-    form = DeleteItemForm()
+    form = DeleteForm()
     context = {"item": item, "form": form}
     return render(request, "items/delete.html", context)
 
