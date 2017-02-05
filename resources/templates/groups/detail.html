@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 
-{% block content %}
-
-  &gt; <a href="..">Groups</a> &gt; {{ group.storage.name }}
-  
+{% block navigation %}
+  <h3><a href="..">Groups</a> &gt; {{ group.storage.name }}</h3>
   <div>
     <form method="post">
       {{ form }}
@@ -11,19 +9,30 @@
       {% csrf_token %}
     </form>
   </div>
+{% endblock %}
 
+{% block content %}
 {% if resources %}
-  <ul>
+<table class="table">
+  <thead>
+    <tr>
+    </tr>
+  <thead>
+  <tbody>
   {% for resource in resources %}
-    <li>
-      <a href="/resources/{{ resource.pk }}">{{ resource }}</a>
-      <a href="{{ resource.url }}">&#128279;</a>
-      <a href="/resources/{{ resource.pk }}/delete">[X]</a>
-      {% comment %}
-      {% endcomment %}
-    </li>
+    <tr>
+      <td>
+        <a href="/resources/{{ resource.pk }}">{{ resource }}</a>
+      </td>
+      <td>
+        <a href="{{ resource.url }}">&#128279;</a>
+      </td>
+      <td>
+        <a href="/resources/{{ resource.pk }}/delete">[X]</a>
+      </td>
+    </tr>
   {% endfor %}
-  </ul>
+  <tbody>
 {% else %}
 No resources
 {% endif %}
