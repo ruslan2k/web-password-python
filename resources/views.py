@@ -114,7 +114,7 @@ def groups_delete(request, group_id):
             group.delete()
             return HttpResponseRedirect("/resources/groups/")
     form = DeleteForm()
-    context = {"issue": storage.name, "form": form}
+    context = {"name": storage.name, "form": form}
     return render(request, "delete.html", context)
 
 
@@ -176,8 +176,8 @@ def delete_resource(request, resource_id):
             resource.delete()
             return HttpResponseRedirect("/resources/groups/{}".format(group_id))
     form = DeleteForm()
-    context = {"resource": resource, "form": form}
-    return render(request, "resources/delete.html", context)
+    context = {"name": resource.name, "form": form}
+    return render(request, "delete.html", context)
 
 
 def delete_item(request, item_id):
@@ -191,7 +191,7 @@ def delete_item(request, item_id):
             item.delete()
             return HttpResponseRedirect("/resources/{}".format(resource.pk))
     form = DeleteForm()
-    context = {"item": item, "form": form}
-    return render(request, "items/delete.html", context)
+    context = {"name": item.key, "form": form}
+    return render(request, "delete.html", context)
 
 
