@@ -107,14 +107,15 @@ def groups_delete(request, group_id):
     if not request.user.groups.filter(pk=group_id).exists():
         raise Http404
     group = get_object_or_404(Group, pk=group_id)
+    storage = get_object_or_404(Storage, group_id=group_id)
     if request.method == 'POST':
         form = DeleteForm(request.POST)
         if form.is_valid():
             group.delete()
             return HttpResponseRedirect("/resources/groups/")
     form = DeleteForm()
-    context = {"group": group, "form": form}
-    return render(request, "groups/delete.html", context)
+    context = {"issue": storage.name, "form": form}
+    return render(request, "delete.html", context)
 
 
 @login_required(login_url='/account/login/')
