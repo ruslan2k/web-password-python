@@ -16,9 +16,9 @@ SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_AGE = 9 * 3600
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-DATABASES = {}
-
-DATABASES["default"] = dj_database_url.config()
+DATABASES = {
+    "default": dj_database_url.config()
+}
 
 if not DATABASES["default"]:
     DATABASES = {
