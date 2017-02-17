@@ -1,0 +1,33 @@
+<html>
+<body>
+
+<a href="/">home</a><br>
+
+Resources :: index
+
+<form method="post">
+  {{ form }}
+  <input type="submit" value="Submit"/>
+  {% csrf_token %}
+</form>
+
+{% if resources %}
+  <ul>
+  {% for resource in resources %}
+    <li>
+      <a href="/resources/{{ resource.id }}">{{ resource.name }}</a>
+      <a href="{{ resource.url }}">{{ resource.url }}</a>
+    </li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No resources are aviable.</p>
+{% endif %}
+
+<!-- request.session
+
+
+-->
+
+</body>
+</html>

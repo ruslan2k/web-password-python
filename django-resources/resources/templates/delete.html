@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block navigation %}
+<h3>{{ name }}</h3>
+{% endblock %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+  <input type="submit" value="Delete">
+</form>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block navigation %}
+  <h3>Groups</h3>
+  
+  {% if groups %}
+    {% for group in groups %}
+      <a class="btn btn-a btn-sm" href="/resources/groups/{{ group.pk }}">{{ group.storage.name }}</a>
+    {% endfor %}
+  {% else %}
+    <p>No groups found.</p>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div>
+    <form method="post">
+      {{ form }}
+      <input type="submit" value="Submit"/>
+      {% csrf_token %}
+    </form>
+  </div>
+  
+  {% comment "Debug info" %}
+    request.is_secure: {{ request.is_secure }}
+  {% endcomment %}
+{% endblock %}
