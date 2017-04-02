@@ -11,7 +11,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     salt = models.CharField(max_length=254, blank=True)
-    enc_sym_key = models.CharField(max_length=254)
+    enc_sym_key = models.CharField(max_length=254, null=True)
     pub_key = models.TextField()
     enc_priv_key = models.TextField(null=True)
 
