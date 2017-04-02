@@ -13,7 +13,7 @@ class Profile(models.Model):
     salt = models.CharField(max_length=254, blank=True)
     enc_sym_key = models.CharField(max_length=254)
     pub_key = models.TextField()
-    enc_priv_key = models.TextField()
+    enc_priv_key = models.TextField(null=True)
 
 
 @receiver(post_save, sender=User)
