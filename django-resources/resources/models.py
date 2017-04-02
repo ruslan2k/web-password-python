@@ -12,7 +12,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     salt = models.CharField(max_length=254, blank=True)
     enc_sym_key = models.CharField(max_length=254, null=True)
-    pub_key = models.TextField()
+    pub_key = models.TextField(null=True)
     enc_priv_key = models.TextField(null=True)
 
 
