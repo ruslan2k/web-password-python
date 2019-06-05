@@ -7,21 +7,35 @@ const uuidv4 = require('uuid/v4')
 
 const adapter = new FileSync('db.json')
 const db = low(adapter)
-const passwordFile = process.env.passwordFile || path.join(__dirname, '.env.passwordFile')
-const publicKeyFile = process.env.publicKeyFile || path.join(__dirname, '.env.publicKeyFile')
-const encryptedPrivKeyFile = process.env.encryptedPrivKeyFile || path.join(__dirname, '.env.encryptedPrivKeyFile')
+const passwordFile = process.env.passwordFile || path.join(__dirname, 'secret.password')
+const publicKeyFile = process.env.publicKeyFile || path.join(__dirname, 'publicKey.pem')
+const encPrivateKeyFile = process.env.encPrivateKeyFile || path.join(__dirname, 'privateKey.pem')
 var cSPassword
+var cSPublicKey
+var cSPrivateKey
 
-if (fs.existsSync(passwordFile) && fs.readFileSync(passwordFile)) {
-  cSPassword = fs.readFileSync(passwordFile)
+if (fs.existsSync(passwordFile) && fs.existsSync(publicKeyFile) && fs.existsSync(encPrivateKeyFile)) {
+  cSPassword = fs.readFileSync(passwordFile).toString()
+  cSPublicKey = fs.readFileSync(publicKeyFile).toString()
+  cSPrivateKey = fs.readFileSync(encPrivateKeyFile).toString()
 } else {
-  cSPassword = crypto.randomBytes(32).toString('hex')
-  fs.writeFileSync(passwordFile, cSPassword)
+  cSPassword = crypto.randomBytes(320)
+
+  const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
+    modulusLength: 4096,
+    publicKeyEncoding: { type: 'spki', format: 'pem' },
+    privateKeyEncoding: { type: 'pkcs8', format: 'pem', cipher: 'aes-256-cbc', passphrase: cSPassword.toString('hex') }
+  })
+  cSPublicKey = publicKey
+  cSPrivateKey = privateKey
+
+  fs.writeFileSync(passwordFile, cSPassword.toString('hex'))
+  fs.writeFileSync(publicKeyFile, cSPublicKey)
+  fs.writeFileSync(encPrivateKeyFile, cSPrivateKey)
 }
 
-
 // Set some defaults (required if your JSON file is empty)
-db.defaults({ groups: [], profiles: [], user: {}})
+db.defaults({ groups: [], profiles: [], user: {} })
   .write()
 
 function createGroup (userId, name) {
@@ -50,14 +64,14 @@ function createUserProfile (userId, password) {
       cipher: 'aes-256-cbc',
       passphrase: key.toString('hex')
     }
-  });
+  })
   db.get('profiles')
     .push({
       id: profileId,
       userId: userId,
       salt: salt,
       publicKey: publicKey,
-      encryptedPrivateKey: privateKey,
+      encryptedPrivateKey: privateKey
     })
     .write()
   return profileId
